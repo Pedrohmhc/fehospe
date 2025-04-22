@@ -1,0 +1,720 @@
+<?php
+include_once '<config/init.php';
+include_once 'includes/header.php';
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEHOSPE - Federação dos Hospitais Filantrópicos de Pernambuco</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Site oficial da Federação dos Hospitais Filantrópicos de Pernambuco (FEHOSPE)." />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <!-- Estilos principais -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <!-- Estilo personalizado -->
+    <style>
+        /* Corpo da página */
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #2c6e6f;
+            color: #fff;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            margin: 0;
+        }
+
+        nav .nav-item {
+            margin-left: 20px;
+        }
+
+        nav .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav .nav-link:hover,
+        nav .nav-link.active {
+            background-color: #37807e;
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: #37807e;
+            color: #fff;
+            text-align: center;
+            padding: 6rem 1rem;
+        }
+
+        .hero-section h2 {
+            font-size: 3rem;
+            font-weight: 600;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        /* Seções */
+        .section {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .active-section {
+            display: block;
+        }
+
+        /* Lista de Entidades Associadas */
+        .list-group-item {
+            background-color: #ffffff;
+            border: 1px solid #e1e1e1;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background-color: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #2c6e6f;
+            color: #fff;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #f4a261;
+        }
+
+        aside section h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  aside section ul li a {
+    color: #37807e;
+    text-decoration: none;
+  }
+
+  aside section ul li a:hover {
+    color: #2c6b66;
+    text-decoration: underline;
+  }
+
+  aside section {
+    margin-bottom: 2rem;
+  }
+
+        /* Estilos gerais para o formulário */
+    #contato {
+      background-color: #f9f9f9;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #contato h2 {
+      font-size: 2rem;
+      color: #37807e;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .form-label {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-control {
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      box-shadow: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #37807e;
+      box-shadow: 0 0 5px rgba(55, 128, 126, 0.4);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+    }
+
+    .btn-primary {
+      background-color: #37807e;
+      border-color: #37807e;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #2c6b66;
+      border-color: #2c6b66;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      #contato {
+        padding: 1.5rem;
+      }
+
+      .btn-primary {
+        width: 100%;
+      }
+    }
+
+        /* Botões */
+        .btn {
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        /* Seção de Notícias na Home */
+#noticias-home {
+    padding: 4rem 1rem;
+    background-color: #f9f9f9;
+}
+
+#noticias-home .main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#noticias-home .content {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+#noticias-home .card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#noticias-home .card:hover {
+    transform: translateY(-5px);
+}
+
+#noticias-home .card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+#noticias-home .card h3 {
+    font-size: 1.25rem;
+    color: #2c6e6f;
+    margin-bottom: 0.5rem;
+}
+
+#noticias-home .card p {
+    font-size: 1rem;
+    color: #444;
+    flex-grow: 1;
+}
+
+#noticias-home .card .read-more {
+    margin-top: 1rem;
+    display: inline-block;
+    color: #37807e;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#noticias-home .card .read-more:hover {
+    color: #2c6e6f;
+}
+
+/* Sidebar de notícias */
+#noticias-home .sidebar {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+#noticias-home .sidebar h3 {
+    font-size: 1.25rem;
+    color: #2c6e6f;
+    margin-bottom: 1rem;
+}
+
+#noticias-home .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#noticias-home .sidebar li {
+    margin-bottom: 0.75rem;
+}
+
+#noticias-home .sidebar a {
+    color: #37807e;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+#noticias-home .sidebar a:hover {
+    color: #2c6e6f;
+}
+
+.sidebar {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+}
+
+.sidebar-title {
+  margin-bottom: 1rem;
+}
+
+.sidebar-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-list li {
+  margin-bottom: 0.75rem;
+}
+
+.sidebar-list a {
+  color: #37807e;
+  text-decoration: none;
+}
+
+.sidebar-list a:hover {
+  text-decoration: underline;
+}
+
+
+.carousel-item img {
+  max-height: 300px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto; /* remove restrições de largura */
+  height: auto; /* remove restrições de altura */
+  opacity: 0.8;
+  padding: 0;
+}
+
+.carousel-control-prev {
+  left: 300px;  /* distância da borda esquerda */
+}
+
+.carousel-control-next {
+  right: 300px; /* distânica da borda direita */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 40px;   /* tamanho dos ícones */
+  height: 40px;
+  background-size: 100% 100%; /* garante que o ícone ocupe todo o espaço definido */
+}
+
+        /* Ajuste para dispositivos móveis */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+  <!-- Navegação do header -->
+<header class="py-3 shadow-sm" style="background-color: #2c6b66;">
+  <div class="container d-flex flex-wrap justify-content-between align-items-center">
+    <h1 class="h4 mb-0">
+      <a href="index.php" class="text-white text-decoration-none">FEHOSPE</a>
+    </h1>
+
+    <nav class="d-flex align-items-center" style="gap: 20px;">
+      <ul class="nav me-3">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="index.php">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="quem-somos.php">Quem Somos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="entidades.php">Entidades Associadas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="diretoria.php">Diretoria</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="contato.php">Contato</a>
+        </li>
+      </ul>
+
+      <?php if (isset($_SESSION['usuario_id'])): ?>
+        <div class="text-white">
+          Bem-vindo, <?php echo $_SESSION['usuario_nome']; ?> |
+          <a href="painel.php" class="text-white">Painel</a> |
+          <a href="logout.php" class="text-white">Sair</a>
+        </div>
+      <?php else: ?>
+        <form method="POST" action="login.php" class="d-flex align-items-center" style="gap: 5px;">
+          <input type="email" name="email" placeholder="Email" class="form-control form-control-sm" required>
+          <input type="password" name="senha" placeholder="Senha" class="form-control form-control-sm" required>
+          <input type="submit" value="Entrar" class="btn btn-light btn-sm">
+        </form>
+      <?php endif; ?>
+    </nav>
+  </div>
+</header>
+
+
+
+  <!-- Home (FEHOSPE - Federação dos Hospitais Filantrópicos de Pernambuco) -->
+  <section id="home" class="section active-section">
+    <div id="carouselHome" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active" data-bs-interval="5000">
+          <img src="img/slide_fehospe.jpg" class="d-block w-100" alt="Imagem 1">
+        </div>
+        <!-- Slide 2 -->
+        <div class="carousel-item" data-bs-interval="5000">
+          <img src="img/slide_fehospe_2.jpg" class="d-block w-100" alt="Imagem 2">
+          </div>
+        </div>
+      
+      <!-- Controles -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselHome" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselHome" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Próximo</span>
+      </button>
+    </div>
+
+  <!-- Seção Notícias -->
+<section id="noticias-home" class="container py-5">
+  <div class="row">
+    
+    <!-- Coluna de notícias -->
+    <div class="col-md-8 mb-4">
+      <div class="row g-4">
+        
+        <!-- Card 1 -->
+        <div class="col-md-6">
+          <div class="card h-100">
+            <img src="img/33congresso.png" class="card-img-top" alt="Notícia 1">
+            <div class="card-body">
+              <h5 class="card-title">As inscrições para o 33º Congresso Nacional da CMB estão abertas!</h5>
+              <p class="card-text">Não fique de fora do maior evento das Santas Casas e Hospitais Filantrópicos do Brasil[...]</p>
+              <a href="noticias.php?id=8= $noticia['id'] ?>" class="btn btn-primary mt-2">Leia mais</a>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-md-6">
+          <div class="card h-100">
+            <img src="img/reuniaocmb.jpg" class="card-img-top" alt="Notícia 2">
+            <div class="card-body">
+              <h5 class="card-title">Reunião com o novo ministro da Saúde, Alexandre Padilha.</h5>
+              <p class="card-text">Na manhã da última quarta-feira, 26 de março de 2025, a Confederação das Santas Casas e Hospitais Filantrópicos (CMB) participou de sua primeira reunião com o novo ministro da Saúde, Alexandre Padilha[...]</p>
+              <a href="noticias.php?id=14= $noticia['id'] ?>" class="btn btn-primary mt-2">Leia mais</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-md-6">
+          <div class="card h-100">
+            <img src="img/noticia3.jpg" class="card-img-top" alt="Notícia 3">
+            <div class="card-body">
+              <h5 class="card-title">Fehospe recebe representante do Ministério da Saúde</h5>
+              <p class="card-text">A presidente da Federação dos Hospitais Filantrópicos de Pernambuco (Fehospe) e superintendente-geral do IMIP, Tereza Campos Neta[...]</p>
+              <a href="noticias.php?id=15= $noticia['id'] ?>" class="btn btn-primary mt-2">Leia mais</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-md-6">
+          <div class="card h-100">
+            <img src="img/logo_fehospe.jpg" class="card-img-top" alt="Notícia 4">
+            <div class="card-body">
+              <h5 class="card-title">Gestores de hospitais filantrópicos se reúnem com governador</h5>
+              <p class="card-text">Federação de Hospitais Filantrópicos de Pernambuco (FEHOSPE) se reuniu com o governador Paulo Câmara (PSB), e com o secretário estadual de Saúde, André Longo[...]</p>
+              <a href="noticias.php?id=16= $noticia['id'] ?>" class="btn btn-primary mt-2">Leia mais</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="col-md-6">
+          <div class="card h-100">
+            <img src="img/logo_fehospe.jpg" class="card-img-top" alt="Notícia 5">
+            <div class="card-body">
+              <h5 class="card-title">União dos hospitais favorece o debate, diz presidente da Fehospe</h5>
+              <p class="card-text">A Federação das Misericórdias e Entidades Filantrópicas de Pernambuco (Fehospe) está mobilizando todos seus associados para participarem do 28º Congresso Nacional das Santas Casas e Hospitais Filantrópicos[...]</p>
+              <a href="noticias.php?id=17= $noticia['id'] ?>" class="btn btn-primary mt-2">Leia mais</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="col-md-6">
+          <div class="card h-100">
+            <img src="img/logo_fehospe.jpg" class="card-img-top" alt="Notícia 5">
+            <div class="card-body">
+              <h5 class="card-title">União dos hospitais favorece o debate, diz presidente da Fehospe</h5>
+              <p class="card-text">A Federação das Misericórdias e Entidades Filantrópicas de Pernambuco (Fehospe) está mobilizando todos seus associados para participarem do 28º Congresso Nacional das Santas Casas e Hospitais Filantrópicos[...]</p>
+              <a href="noticias.php?id=18= $noticia['id'] ?>" class="btn btn-primary mt-2">Leia mais</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Barra lateral -->
+    <aside class="col-md-4">
+      <div class="bg-white p-3 border rounded mb-4 shadow-sm">
+        <h5 class="mb-3">📰 Últimas Notícias</h5>
+        <ul class="list-unstyled">
+          <li><a href="noticias.php" class="text-decoration-none text-primary">33º Congresso Nacional da CMB</a></li>
+          <li><a href="noticias2.php" class="text-decoration-none text-primary">Reunião com o novo ministro da Saúde, Alexandre Padilha.</a></li>
+          <li><a href="noticias3.php" class="text-decoration-none text-primary">Fehospe recebe representante do Ministério</a></li>
+          <li><a href="noticias4.php" class="text-decoration-none text-primary">Gestores de hospitais filantrópicos se reúnem</a></li>
+          <li><a href="noticias5.php" class="text-decoration-none text-primary">União dos hospitais favorece o debate, diz presidente</a></li>
+        </ul>
+      </div>
+
+      <div class="bg-white p-3 border rounded shadow-sm">
+        <h5 class="mb-3">📅 Agenda</h5>
+        <ul class="list-unstyled">
+          <li><a href="noticias.php" class="text-decoration-none text-primary">33º Congresso Nacional da CMB - 12 - 14/08/25</a></li>
+          <li><a href="#" class="text-decoration-none text-primary">Reunião com diretoria - 02/05/2025</a></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+</section>
+
+  <!-- Quem Somos -->
+  <section id="quem-somos" class="section">
+    <div class="container">
+      <h2>Quem Somos</h2>
+      <p>Criada em 1987, a Federação dos Hospitais Filantrópicos de Pernambuco é uma associação civil, sem fins lucrativos ou econômicos, com sede em Recife. A entidade é um órgão de união, integração e representação dos hospitais filantrópicos do estado de Pernambuco.</p>
+      <p><strong>Missão:</strong> A defesa, a proteção, a representação e a assistência dos interesses sociais e econômicos das federadas.</p>
+    </div>
+  </section>
+
+  <!-- Entidades Associadas -->
+  <section id="associados" class="section">
+    <div class="container">
+      <h2>Veja a Lista de Entidades Associadas</h2>
+      <ul class="list-group">
+        <li class="list-group-item">APAMI Buíque</li>
+        <li class="list-group-item">APAMI Vitória</li>
+        <li class="list-group-item">Casa de Saúde Nossa Senhora de Fátima</li>
+        <li class="list-group-item">Fundação Altino Ventura – <a href="http://www.fundacaoaltinoventura.com.br/site/" target="_blank" rel="noopener noreferrer">Fundação Altino Ventura</a></li>
+        <li class="list-group-item">Fundação Professor Martiniano Fernandes – <a href="http://www.imip.org.br" target="_blank" rel="noopener noreferrer">Fundação Professor Martiniano Fernandes</a></li>
+        <li class="list-group-item">Instituto de Medicina Integral Prof. Fernando Figueira – IMIP – <a href="http://www.imip.org.br" target="_blank" rel="noopener noreferrer">IMIP</a></li>
+        <li class="list-group-item">Hospital Armindo Moura – <a href="http://www.hospitalarmindomoura.org.br" target="_blank" rel="noopener noreferrer">Hospital Armindo Moura</a></li>
+        <li class="list-group-item">Hospital do Câncer de Pernambuco – <a href="http://hcp.org.br/" target="_blank" rel="noopener noreferrer">Hospital do Câncer de Pernambuco</a></li>
+        <li class="list-group-item">Hospital do Tricentenário – <a href="http://htri.org.br/" target="_blank" rel="noopener noreferrer">Hospital do Tricentenário</a></li>
+        <li class="list-group-item">Hospital do Vale</li>
+        <li class="list-group-item">Hospital e Maternidade Santa Maria – <a href="https://www.hmsantamariaararipina.com.br/" target="_blank" rel="noopener noreferrer">Hospital e Maternidade Santa Maria</a></li>
+        <li class="list-group-item">Hospital Evangélico</li>
+        <li class="list-group-item">Hospital Infantil Palmira Sales</li>
+        <li class="list-group-item">Hospital Jesus Pequenino</li>
+        <li class="list-group-item">Hospital Maria Lucinda – <a href="http://www.hospitalmarialucinda.com/" target="_blank" rel="noopener noreferrer">Hospital Maria Lucinda</a></li>
+        <li class="list-group-item">Hospital Maria Vitória</li>
+        <li class="list-group-item">Hospital Memorial Jaboatão – <a href="http://www.hmjpe.org/" target="_blank" rel="noopener noreferrer">Hospital Memorial Jaboatão</a></li>
+        <li class="list-group-item">Hospital Memorial Guararapes – <a href="http://www.hmgpe.org" target="_blank" rel="noopener noreferrer">Hospital Memorial Guararapes</a></li>
+        <li class="list-group-item">Hospital Santa Rosa</li>
+        <li class="list-group-item">Hospital Santa Terezinha – <a href="http://www.hospitalsantateresinha.com.br/" target="_blank" rel="noopener noreferrer">Hospital Santa Terezinha</a></li>
+        <li class="list-group-item">Hospital Severino Távora</li>
+        <li class="list-group-item">Instituto Pernambucano de Assistência e Saúde – <a href="http://www.ipassaude.org/" target="_blank" rel="noopener noreferrer">Instituto Pernambucano de Assistência e Saúde</a></li>
+        <li class="list-group-item">Obras Sociais Irmã Dulce – <a href="https://www.osid.org.br" target="_blank" rel="noopener noreferrer">Obras Sociais Irmã Dulce</a></li>
+        <li class="list-group-item">SANTA CASA DE MISERICÓRDIA DO RECIFE – <a href="http://www.santacasarecife.org.br/" target="_blank" rel="noopener noreferrer">Santa Casa de Misericórdia do Recife</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Diretoria -->
+  <section id="diretoria" class="section">
+    <div class="container">
+      <h2>Membros da Diretoria 2023/2027</h2>
+
+      <h3>Diretoria Executiva</h3>
+      <ul class="list-group">
+        <li class="list-group-item"><strong>DIRETOR PRESIDENTE:</strong> Gil Mendonça Brasileiro</li>
+        <li class="list-group-item"><strong>DIRETOR VICE-PRESIDENTE:</strong> Maria de Fátima Souza Alencar </li>
+      </ul>
+
+      <h3>Conselho de Administração</h3>
+      <ul class="list-group">
+        <li class="list-group-item">Tereza de Jesus Campos Neta</li>
+        <li class="list-group-item">Samuel Ramos Gomes</li>
+        <li class="list-group-item">Sidney Batista Neves</li>
+        <li class="list-group-item">Claudionor Alves de Lima</li>
+        <li class="list-group-item">Marcelo Carvalho Ventura</li>
+      </ul>
+
+      <h3>Conselho Fiscal</h3>
+      <ul class="list-group">
+        <li class="list-group-item">Luiz Alberto Pereira de Araújo</li>
+        <li class="list-group-item">Lindalva Cordeiro Duarte</li>
+        <li class="list-group-item">Romildo Interaminense Guerra</li>
+      </ul>
+
+      <h3>Suplentes do Conselho Fiscal</h3>
+      <ul class="list-group">
+        <li class="list-group-item">Eduardo Batista Barbosa</li>
+      </ul>
+    </div>
+</section>
+
+  <!-- Rodapé -->
+  <footer style="background-color: #37807e; color: #fff; padding: 2rem 0;">
+    <div class="container">
+      <div class="row">
+  
+        <!-- Endereço -->
+        <div class="col-md-4 mb-4">
+          <h5 style="color: #fff;">Endereço</h5>
+          <a href = https://www.google.com.br/maps/place/Empresarial+Burle+Marx/@-8.045809,-34.8906564,16.25z/data=!4m6!3m5!1s0x7ab193865792c5f:0x6a51f47610fcb86e!8m2!3d-8.046106!4d-34.8902188!16s%2Fg%2F11jyqjq2zm?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D>
+            Av. Agamenon Magalhães, 2615 <br>
+            Edifício Burle Marx, 4° andar - sala 406 <br>
+            Recife - PE, 50070-160<br>
+            Brasil
+          </a>
+        </div>
+  
+        <!-- Contato -->
+        <div class="col-md-4 mb-4">
+          <h5 style="color: #fff;">Contato</h5>
+          <p><i class="bi bi-telephone-fill"></i> (81) 99999-9999</p>
+          <p><i class="bi bi-envelope-fill"></i> contato@fehospe.org.br</p>
+        </div>
+  
+        <!-- Redes Sociais -->
+        <div class="col-md-4 mb-4">
+          <h5 style="color: #fff;">Redes Sociais</h5>
+          <a href="https://www.facebook.com/FEHOSPE/?locale=pt_BR" class="text-white me-3"><i class="bi bi-facebook fs-4"></i></a>
+          <a href="https://www.instagram.com/fehospe?igsh=MXd0dTZsd2g4enR4cA==" class="text-white me-3"><i class="bi bi-instagram fs-4"></i></a>
+          <a href="#" class="text-white"><i class="bi bi-whatsapp fs-4"></i></a>
+        </div>
+  
+      </div>
+      <hr style="border-color: rgba(255,255,255,0.2);">
+      <a href="http://cmb.org.br">Filiada a CMB – Confederação das Santas Casas e Hospitais Filantrópicos</a>
+      <p class="text-center mb-0" style="color: #fff;">&copy; 2025 FEHOSPE - Todos os direitos reservados.</p>
+    </div>
+  </footer>
+  
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showSection(sectionId) {
+      // Esconde todas as seções
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => section.classList.remove('active-section'));
+
+      // Mostra a seção selecionada
+      const sectionToShow = document.getElementById(sectionId);
+      sectionToShow.classList.add('active-section');
+    }
+  </script>
+
+<script>
+  function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(section => {
+      section.classList.remove('active-section');
+    });
+    document.getElementById(sectionId).classList.add('active-section');
+  }
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
